@@ -1,13 +1,15 @@
 package spark
 
-import org.apache.spark.SparkContext
+import org.apache.spark.{SparkConf, SparkContext}
 
 object BooksInvertedIndex {
   def main(args: Array[String]): Unit = {
-    val sc = new SparkContext("local[*]", "BookInvertedIndex")
-    val textFile = sc.wholeTextFiles("data/books/*")
+    val conf = new SparkConf().setAppName("Books Inverted Index").setMaster("local[*]")
+    val sc = new SparkContext(conf)
 
-    textFile
+    val input = sc.wholeTextFiles("data/books/*")
+
+    input
       .flatMap {
         case (path, txt) =>
           val words = txt.toLowerCase.split("[\\W_]+")
