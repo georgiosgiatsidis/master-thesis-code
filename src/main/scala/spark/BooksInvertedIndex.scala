@@ -13,9 +13,7 @@ object BooksInvertedIndex {
       .flatMap {
         case (path, txt) =>
           val words = txt.toLowerCase.split("[\\W_]+")
-          words.map(word => {
-            (word, Set(path.split("/").last))
-          })
+          words.map(word => (word, Set(path.split("/").last)))
       }
       .reduceByKey(_ ++ _)
       .saveAsTextFile("output")
