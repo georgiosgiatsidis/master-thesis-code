@@ -1,16 +1,17 @@
 package utills
 
 object Utils {
-  def measureTime[T](calc: => Double, msg: String) {
+  def measureTime[A](calc: => A, msg: String) {
     println(msg)
 
     val t1 = System.nanoTime
     val result = calc
     val t2 = System.nanoTime
 
+    val ms = (t2 - t1) / 1000000
+
     println(
-      "\tResult: \t\t%s\n\tElapsed time: \t%s millis"
-        .format(result, (t2 - t1) / 1000000)
+      s"\tResult: \t\t$result\n\tElapsed time: \t$ms millis"
     )
   }
 }

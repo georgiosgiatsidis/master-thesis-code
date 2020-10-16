@@ -32,7 +32,7 @@ object Pi {
     val n = math.min(100000L * slices, Int.MaxValue).toInt
 
     Utils.measureTime(await(pi(n)), "Sequential:")
-    Utils.measureTime(await(piParallel(n, 2)), "Parallel:")
+    Utils.measureTime(await(piParallel(n, slices)), "Parallel:")
   }
 
 }
